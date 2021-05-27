@@ -22,6 +22,13 @@ def spam(message):
             except:
                 continue
 
+
+@bot.message_handler(commands = ['check_all'])
+def bot_message(message):
+    if (message.from_user.id == 345765593):
+       users = db.get_all_users()
+    bot.send_message(message.chat.id, "Количество людей которые используют твоего бота = " + str(len(users)))
+
 #Ссыки
 @bot.message_handler(commands=['website'])
 def open_website(message):

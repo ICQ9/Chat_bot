@@ -67,6 +67,10 @@ class Database:
             else:
                 return [0]
 
+    def get_all_users(self):
+            with self.connection:
+                return self.cursor.execute("select * from users").fetchall()
+
 #Рассылка
     def get_user(self):
         with self.connection:
