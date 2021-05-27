@@ -1,5 +1,6 @@
 import config
 import telebot
+import time
 from telebot import types
 from database import Database
 
@@ -8,8 +9,20 @@ from typing import final
 db = Database('db.db')
 bot = telebot.TeleBot(config.TOKEN)
 
+#Рассылка
+@bot.message_handler(commands=["spam"])
+def spam(message):
+    if (message.from_user.id == 345765593):
+        user_mgs = message.text
+        separating = user_mgs.split(maxsplit=1)
+        users_spam= db.get_user()
+        for i in users_spam:
+            try:
+                bot.send_message(i[1],separating[1])
+            except:
+                continue
 
-#------------------------------------------
+#Ссыки
 @bot.message_handler(commands=['website'])
 def open_website(message):
     markup = types.InlineKeyboardMarkup()
@@ -188,6 +201,33 @@ def bot_voice(message):
         chat_info = db.get_active_chat(message.chat.id)
         if chat_info != False:
             bot.send_voice(chat_info[1], message.voice.file_id)
+        else:
+            bot.send_message(message.chat.id, '❌ Вы не начали диалог!')
+
+@bot.message_handler(content_types='video')
+def bot_video(message):
+    if message.chat.type == 'private':
+        chat_info = db.get_active_chat(message.chat.id)
+        if chat_info != False:
+            bot.send_video(chat_info[1], message.video.file_id)
+        else:
+            bot.send_message(message.chat.id, '❌ Вы не начали диалог!')
+
+@bot.message_handler(content_types='video_note')
+def bot_video_note(message):
+    if message.chat.type == 'private':
+        chat_info = db.get_active_chat(message.chat.id)
+        if chat_info != False:
+            bot.send_video_note(chat_info[1], message.video_note.file_id)
+        else:
+            bot.send_message(message.chat.id, '❌ Вы не начали диалог!')
+
+@bot.message_handler(content_types='photo')
+def bot_photo(message):
+    if message.chat.type == 'private':
+        chat_info = db.get_active_chat(message.chat.id)
+        if chat_info != False:
+            bot.send_photo(chat_info[1], message.photo[2].file_id)
         else:
             bot.send_message(message.chat.id, '❌ Вы не начали диалог!')
 

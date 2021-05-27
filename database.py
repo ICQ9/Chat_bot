@@ -67,6 +67,18 @@ class Database:
             else:
                 return [0]
 
+#Рассылка
+    def get_user(self):
+        with self.connection:
+            user = self.cursor.execute("SELECT * FROM users", ()).fetchall()
+            if bool(len(user)):
+                    user_id = user
+                    return user_id
+            else:
+                return [0]
+
+#----------------------------------------------------------------
+
     def create_chat(self, chat_one, chat_two):
         with self.connection:
             if chat_two != 0:
