@@ -16,5 +16,4 @@ requests
 six
 virtualenv
 virtualenv-clone
-types
-Database
+pyTelegramBotApi
