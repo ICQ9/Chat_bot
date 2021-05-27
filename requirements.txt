@@ -11,10 +11,8 @@ psutil
 pyowm
 Pygments
 pyparsing
-pyTelegramBotAPI
-python-telegram-bot
+pyTelegramBotAPI==2.2.3
 requests
 six
 virtualenv
 virtualenv-clone
-telebot
