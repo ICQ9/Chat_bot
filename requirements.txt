@@ -17,3 +17,4 @@ six
 virtualenv
 virtualenv-clone
 pyTelegramBotApi
+time
