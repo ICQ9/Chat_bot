@@ -1,1 +1,0 @@
-TOKEN = "" # Telegram Bot Token
